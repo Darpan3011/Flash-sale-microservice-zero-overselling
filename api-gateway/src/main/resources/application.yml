@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: api-gateway
+  datasource:
+    url: jdbc:postgresql://localhost:5432/flashsale_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  cloud:
+    gateway:
+      mvc:
+        routes:
+        - id: sale-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/sales/**
+        - id: order-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/orders/**
+        - id: waitlist-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/waitlist/**
+  data:
+    redis:
+      host: localhost
+      port: 6380
+
+rate-limiter:
+  enabled: true
+  namespace: flash-sale
+  default-limit: 50
+  default-window-seconds: 60
+  http-filter:
+    enabled: true
+  clients:
+    buy-endpoint:
+      limit: 5
+      window-seconds: 10
+
+server:
+  port: 8080
+
+security:
+  public-endpoints:
+    - /api/sales/**
+    - /api/orders/**
+    - /api/waitlist/**
+    - /actuator/**
+  jwt-secret: myVerySecureSecretKeyForHS384Algorithm123456789012345678901234567890
+  jwt-expiration-seconds: 60
+  refresh-token-expiration-seconds: 86400
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info
+  metrics:
+    export:
+      prometheus:
+        enabled: true

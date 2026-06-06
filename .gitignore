@@ -1,0 +1,70 @@
+# =========================================================================
+# Spring Boot Core & Build Artifacts
+# =========================================================================
+# Maven target directory
+target/
+*.jar
+*.war
+*.ear
+*.nar
+*.car
+*.jackpot
+dependency-reduced-pom.xml
+
+# Gradle build directories and cache
+build/
+.gradle/
+/build.log
+
+# Log files
+*.log
+
+# =========================================================================
+# IDE Settings & Tooling
+# =========================================================================
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse / Spring Tool Suite (STS)
+.metadata/
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+.sts4-cache/
+
+# Visual Studio Code
+.vscode/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# =========================================================================
+# Configuration, Secrets, and Environment Files
+# =========================================================================
+# NEVER commit database credentials or private keys to git
+.env
+.env.local
+*.properties.local
+*.yml.local
+*.yaml.local
+
+# Optional: Ignore specific profile configurations if they hold production secrets
+# application-prod.properties
+# application-prod.yml
+
+# =========================================================================
+# OS / System Specific Files
+# =========================================================================
+.DS_Store
+Thumbs.db

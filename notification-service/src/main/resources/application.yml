@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: notification-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+
+messaging:
+  twilio:
+    enabled: false
+    sid: SID
+    token: TWILIO_TOKEN
+    from: "+16592183618"
+  sns:
+    enabled: false
+    access-key: ACCESS_KEY
+    secret-key: SECRET_KEY
+    region: us-east-1
+  mail:
+    enabled: true
+    host: smtp.gmail.com
+    port: 587
+    username: USERNAME
+    password: PASSWORD
+    starttls: true
+    auth: true
+    debug: false
+
+communication:
+  email:
+    provider: SMTP
+    from: EMAIL
+
+server:
+  port: 8084
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
